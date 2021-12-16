@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="calculator" class="calculator-wrap d-f">
+
+        <div class="calculator-option d-f">
+      
+          <div class="calculator-option-column p d-f-c">
+      
+            <div class="text m-b">Первоночальный депозит</div>
+      
+            <div class="text m-b">Срок вклада</div>
+      
+            <div class="text m-b">Годовая процентная ставка</div>
+      
+          </div>
+      
+          <div class="calculator-option-column p d-f-c">
+      
+            <input type="number" value="10000" name="money" required class="m-b">
+      
+            <select name="months" class="m-b">
+      
+              <option value="3">3 месяца</option>
+      
+              <option value="6">6 месяцев</option>
+      
+              <option value="12">1 год</option>
+      
+              <option value="18">1,5 года</option>
+      
+              <option value="24">2 года</option>
+      
+              <option value="30">2,5 года</option>
+      
+              <option value="36">3 года</option>
+      
+              <option value="60">5 лет</option>
+      
+            </select>
+      
+            <input name="rate" type="number" value="5" class="m-b">
+      
+          </div>
+      
+        </div>
+      
+        <div class="calculator-graph  d-f">
+      
+         
+      
+        <div class="d-f-c p-10 h">
+      
+          <div class="text m-b">Было</div>
+      
+          <div id="money-before"></div>
+      
+          <div id="height-before"></div>
+      
+        </div>
+      
+          <div class="d-f-c p-10 h">
+      
+            <div class="text m-b">Станет</div>
+      
+            <div id="money-after"></div> 
+      
+            <div id="height-after"></div>
+      
+        </div>
+      
+        </div>
+      
+        </form>
+        <script>
+        let form = document.forms.calculator
+
+            let rate = form.rate.value*0.01
+            
+            let initial = +form.money.value
+            
+            let year = form.months.value / 12
+            
+            
+            
+            let result = Math.round(initial * (1 + rate*year))
+            
+            let height = result / form.money.value * 100 + 'px'
+            
+            
+            
+            form.money.oninput = calculate
+            
+            form.months.onchange = calculate
+            
+            form.rate.oninput = calculate
+            
+            
+            
+            function calculate(){
+            
+            
+            
+              if (!initial) return //если это поле пустое - ничего не делаем, просто выходим
+            
+              if (!rate) return
+            
+              if (!year) return
+            
+            
+            
+              document.getElementById('height-after').style.height = height
+            
+              document.getElementById('money-before').innerHTML = form.money.value
+            
+              document.getElementById('money-after').innerHTML = result
+            
+            }
+            
+            calculate()</script>
+</body>
+</html>
